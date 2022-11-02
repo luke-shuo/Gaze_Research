@@ -1,8 +1,8 @@
 import math
-
+from titta import Titta, helpers_tobii as helpers
 import cv2
 import numpy as np
-
+import pandas as pd
 import globalVal
 
 video_addr = globalVal.video_data
@@ -575,3 +575,58 @@ def remove_overlap(aoi_location, state):
             aoi.append((minx,miny,0))
             aoi.append((maxx,maxy,1))
     return aoi
+
+def data_clean(data_path, set_path):
+    data_msg = pd.read_csv(set_path, sep='\t', header=0)
+    sys_time = np.array(data_msg['system_time_stamp'])
+    msg = np.array(data_msg['msg'])
+    image_info = []
+    for i in range(len(msg)):
+        if msg[i] == 'fix off':
+            for j in range(i + 1, len(msg), 2):
+                image_info.append(msg[j])
+                image_info.append(sys_time[j])
+                image_info.append(sys_time[j + 1])
+    gazedata = pd.read_csv(data_path)
+    sys_time = np.array(gazedata['system_time_stamp'])
+    index = []
+    for i in range(0, len(image_info), 3):
+        st = image_info[i + 1]
+        et = image_info[i + 2]
+        j = 0
+        while True:
+            if sys_time[j] >= st:
+                index.append(j)
+                break
+            j += 1
+        i = 0
+        while True:
+            if sys_time[i] >= et:
+                index.append(i - 1)
+                break
+            if i == (len(sys_time) - 1):
+                index.append(i)
+                break
+            i += 1
+
+    x_l = np.array(gazedata['left_gaze_point_on_display_area_x'])
+    x_r = np.array(gazedata['right_gaze_point_on_display_area_x'])
+    y_l = np.array(gazedata['left_gaze_point_on_display_area_y'])
+    y_r = np.array(gazedata['right_gaze_point_on_display_area_y'])
+    for i in range(0, len(index), 2):
+        time = sys_time[index[i]:index[i + 1] + 1]
+        x_1 = x_l[index[i]:index[i + 1] + 1] * 1920
+        x_2 = x_r[index[i]:index[i + 1] + 1] * 1920
+        y_1 = y_l[index[i]:index[i + 1] + 1] * 1080
+        y_2 = y_r[index[i]:index[i + 1] + 1] * 1080
+        df = pd.DataFrame({'time_stamp': time,
+                           'x_cod_left_gaze': x_1,
+                           'y_cod_left_gaze': y_1,
+                           'x_cod_right_gaze': x_2,
+                           'y_cod_right_gaze': y_2
+                           })
+        df.to_csv('dataset%d.csv'%i)
+
+
+
+

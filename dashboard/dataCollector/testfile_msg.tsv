@@ -1,23 +1,23 @@
 	system_time_stamp	msg
-0	2940931638717	Calibration_start
-1	2940931647137	calibration point 0 at position 0.0 -0.0
-2	2940935650891	calibration point 1 at position -19.169474339912615 -10.782829316200846
-3	2940937950784	calibration point 2 at position -19.169474339912615 10.782829316200846
-4	2940940100605	calibration point 3 at position 19.169474339912615 -10.782829316200846
-5	2940942250644	calibration point 4 at position 19.169474339912615 10.782829316200846
-6	2940945325911	Calibration_stop
-7	2940945426129	Validation_start
-8	2940945917491	validation point 0 at position 0.0 -8.087121987150637
-9	2940947417262	validation point 1 at position 0.0 8.087121987150633
-10	2940948917163	validation point 2 at position 14.377105754934462 -0.0
-11	2940950416936	validation point 3 at position -14.377105754934458 -0.0
-12	2940951417404	Validation_end
-13	2940951454933	validation data quality Dev_L: 0.50, Dev_R: 1.12 RMS_L: 0.67, RMS_R: 0.51, SD_L: 0.40, SD_R: 0.34, LOSS_L: 0.00, LOSS_R: 0.00
-14	2940954616548	fix on
-15	2940955600876	fix off
-16	2940955617546	onset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im1.jpeg
-17	2940960601012	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im1.jpeg
-18	2940960617641	onset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im3.jpeg
-19	2940965601001	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im3.jpeg
-20	2940965617464	onset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im2.jpeg
-21	2940970601088	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im2.jpeg
+0	2942335106537	Calibration_start
+1	2942335114601	calibration point 0 at position -19.169474339912615 -10.782829316200846
+2	2942339525301	calibration point 1 at position 19.169474339912615 -10.782829316200846
+3	2942342474613	calibration point 2 at position 0.0 -0.0
+4	2942344624953	calibration point 3 at position 19.169474339912615 10.782829316200846
+5	2942347425099	calibration point 4 at position -19.169474339912615 10.782829316200846
+6	2942351474597	Calibration_stop
+7	2942351574808	Validation_start
+8	2942352075045	validation point 0 at position 0.0 8.087121987150633
+9	2942353575254	validation point 1 at position 0.0 -8.087121987150637
+10	2942355075038	validation point 2 at position -14.377105754934458 -0.0
+11	2942356575093	validation point 3 at position 14.377105754934462 -0.0
+12	2942357575085	Validation_end
+13	2942357614223	validation data quality Dev_L: 1.41, Dev_R: 1.27 RMS_L: 0.18, RMS_R: 0.21, SD_L: 0.15, SD_R: 0.12, LOSS_L: 0.31, LOSS_R: 0.34
+14	2942361334727	fix on
+15	2942362308505	fix off
+16	2942362325344	C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im2.jpeg
+17	2942367308114	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im2.jpeg
+18	2942367324731	C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im3.jpeg
+19	2942372308699	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im3.jpeg
+20	2942372325430	C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im1.jpeg
+21	2942377308627	offset_C:\Users\2602651K\Documents\GitHub\Gaze_Research\dashboard\dataCollector\images\im1.jpeg

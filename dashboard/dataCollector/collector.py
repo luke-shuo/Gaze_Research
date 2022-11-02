@@ -73,6 +73,7 @@ else:
 
 # %% Record some data
 tracker.start_recording(gaze_data=True, store_data=True)
+tracker.gaze_data_container = []
 
 # Present fixation dot and wait for one second
 for i in range(monitor_refresh_rate):
@@ -82,6 +83,7 @@ for i in range(monitor_refresh_rate):
         tracker.send_message('fix on')
 
 tracker.send_message('fix off')
+
 
 if taskChoose[0] == "2. Video":
     # Wait exactly 3 * fps frames (3 s)
@@ -104,7 +106,7 @@ elif taskChoose[0] == "1. Images":
             image.draw()
             t = win.flip()
             if i == 0:
-                tracker.send_message(''.join(['onset_', im_name]))
+                tracker.send_message(''.join([im_name]))
     
         tracker.send_message(''.join(['offset_', im_name]))
 
@@ -112,7 +114,7 @@ win.flip()
 tracker.stop_recording(gaze_data=True)
 
 # Close window and save data
-def read_et_data():
+def read_et_data(mon):
     ''' Read eye tracking data from the buffer
 
     Returns:
@@ -121,7 +123,6 @@ def read_et_data():
     df = pd.DataFrame(tracker.gaze_data_container, columns=tracker.header)
     df.to_csv('test1.csv')
     df.reset_index()
-
     return df
 
 win.close()
