@@ -1,15 +1,14 @@
-import numpy
-import pandas
-import json
-import csv
-import matplotlib
-import cv2
-from matplotlib.backends.backend_agg import FigureCanvasAgg
+import os
+
 import PIL.Image as Image
+import cv2
+import matplotlib
+import numpy
 import numpy as np
 from matplotlib import pyplot, image
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+
 from util import parse_fixations
-import os
 
 # Ploting function based on Pygaze 
 
@@ -448,20 +447,21 @@ def draw_aoi_map(img, period):
 	color = (0, 255, 0)
 	thickness = 4
 	if period == 10:
-		pt1 = [(0, 1080), (0, 540), (0, 0), (640, 0), (1280, 0), (1920, 0)]
-		pt2 = [(1920, 1080), (1920, 540), (1920, 0), (640, 1080), (1280, 1080), (1920, 1080)]
-		text_loc = [(320, 270), (960, 270), (1600, 270), (320, 810), (960, 810), (1600, 810)]
+		pt1 = [(0, 1080), (0, 540), (0, 0), (480, 0), (960,0), (1440, 0), (1920, 0)]
+		pt2 = [(1920, 1080), (1920, 540), (1920, 0), (480, 1080), (960,1080), (1440, 1080), (1920, 1080)]
+		text_loc = [(160, 270), (640, 270), (1120, 270), (1600, 270), (160, 810), (640, 810), (1120, 810), (1600, 810)]
 	elif period == 5:
-		pt1 = [(0, 1080), (0, 720), (0, 360), (0, 0), (480, 0), (960, 0), (1440, 0), (1920, 0)]
-		pt2 = [(1920, 1080), (1920, 720), (1920, 360), (1920, 0), (480, 1080), (960, 1080), (1440, 1080), (1920, 1080)]
-		text_loc = [(160, 180), (640, 180), (1120, 180), (1600, 180), (160, 540), (640, 540), (1120, 540), (1600, 540),
-					(160, 900), (640, 900), (1120, 900), (1600, 900)]
+		pt1 = [(0, 1080),(0, 810), (0, 540), (0, 270), (0, 0), (480, 0), (960, 0), (1440, 0), (1920, 0)]
+		pt2 = [(1920, 1080), (1920, 810), (1920, 540), (1920, 270), (1920, 0), (480, 1080), (960, 1080), (1440, 1080), (1920, 1080)]
+		text_loc = [(160, 135), (640, 135), (1120, 135), (1600, 135),
+					(160, 405), (640, 405), (1120, 405), (1600, 405),
+					(160, 675), (640, 675), (1120, 675), (1600, 675),
+					(160, 945), (640, 945), (1120, 945), (1600, 945),]
 	for i in range(len(pt1)):
 		cv2.line(img, pt1[i], pt2[i], color, thickness)
 	for j in range(len(text_loc)):
 		cv2.putText(img, 'AOI %d' % (j + 1), text_loc[j],
 					cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 4)
-
 
 # ----------------- Helper functions ---------------
 
