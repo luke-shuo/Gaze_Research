@@ -81,7 +81,7 @@ def draw_display(dispsize, imagefile=None):
 	_, ext = os.path.splitext(imagefile)
 	ext = ext.lower()
 	data_type = 'float32' if ext == '.png' else 'uint8'
-	screen = numpy.zeros((dispsize[1], dispsize[0], 4), dtype=data_type)
+	screen = numpy.zeros((dispsize[1], dispsize[0], 3), dtype=data_type)
 	# last field should be 4 for .png and 3 for jpeg
 	# if an image location has been passed, draw the image
 	if imagefile != None:

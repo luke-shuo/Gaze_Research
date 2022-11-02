@@ -18,8 +18,19 @@ from util import step_count
 from util import turnback_count
 
 # get data address from globalVal.py
-gaze_data = globalVal.gaze_data
-image_data = globalVal.image_data
+imageFileName = []
+for filename in os.listdir('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images'):
+    imageFileName.append(filename[-8:-5])
+imageFileName.reverse()
+image_name = st.sidebar.selectbox('Select the image',imageFileName)
+image_csv = pd.read_csv('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/image.csv')
+image_list = np.array(image_csv['0']).tolist()
+dataset_index = image_list.index(image_name)
+
+gaze_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/dataset%d.csv' % dataset_index
+image_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images/'+ image_name+ '.jpeg'
+
+
 fixation_addr = globalVal.fixation_addr
 bounding_addr = globalVal.bounding_map_addr
 video_addr = globalVal.video_data
@@ -80,9 +91,9 @@ fixation = image_convert(fixation)
 fixation_inte = image_convert(fixation_inte)
 
 # generate default transition video
-if not os.path.exists(video_addr+ 'default' + '.mp4'):
+if not os.path.exists(video_addr+ image_name+'_default' + '.mp4'):
     fourcc = cv2.VideoWriter_fourcc(*'avc1')  # H264
-    videowrite = cv2.VideoWriter(video_addr + 'default' + '.mp4', fourcc, len(fixations)/60,
+    videowrite = cv2.VideoWriter(video_addr + image_name+'_default' + '.mp4', fourcc, len(fixations)/60,
                                      (1920,1080))
     for j in range(len(fixations)):
         fixation_slice = draw_fixations([fixations[j]], dispsize=[1920, 1080],
@@ -132,7 +143,7 @@ if submit_button:
     st.video(data=video_addr + 'fixation_output.mp4')
 else:
     st.header("Transition Video")
-    st.video(data=video_addr + 'default.mp4')
+    st.video(data=video_addr + image_name+'_default.mp4')
 
 st.header("Heatmap")
 st.image(heatmap)

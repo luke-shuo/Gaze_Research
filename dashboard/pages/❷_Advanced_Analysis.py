@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import cv2
+import os
 import graphviz
 import globalVal
 from plots import draw_fixations
@@ -17,8 +18,18 @@ from util import jump_aoiLocation
 from util import remove_overlap
 from util import checkOverlap
 
+imageFileName = []
+for filename in os.listdir('/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataCollector/images'):
+    imageFileName.append(filename[-8:-5])
+imageFileName.reverse()
+image_name = st.sidebar.selectbox('Select the image',imageFileName)
+image_csv = pd.read_csv('/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataset/image.csv')
+image_list = np.array(image_csv['0']).tolist()
+dataset_index = image_list.index(image_name)
+
+#gaze_data = '/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataset/dataset%d.csv' % dataset_index
 gaze_data = globalVal.gaze_data
-image_data = globalVal.image_data
+image_data = '/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataCollector/images/'+ image_name+ '.jpeg'
 
 st.markdown("""
 <style>
