@@ -1,14 +1,8 @@
 import os
-import pickle
-import pandas as pd
-from psychopy import visual, monitors, gui, core
-import numpy as np
-import matplotlib.pyplot as plt
-from titta import Titta, helpers_tobii as helpers
 import streamlit as st
-from dataCollector import collector
 
-st.set_page_config(layout="wide",page_title="Gaze Tracking DashBoard")
+
+st.set_page_config(layout="wide", page_title="Gaze Tracking DashBoard")
 
 # App title
 st.title('Gaze Tracking DashBoard')
@@ -25,7 +19,7 @@ st.markdown("""
     font-family: 'Arial';
     font-size: 20px;
     }
-    </style> """, unsafe_allow_html=True,)
+    </style> """, unsafe_allow_html=True, )
 
 st.markdown('Wellcome to Gaze Tracking Dashboard!')
 
@@ -57,14 +51,11 @@ div.stButton > button:active {
 	top:1px;
 }
 
-</style>""", unsafe_allow_html=True)        #used to customized button
+</style>""", unsafe_allow_html=True)  # used to customized button
 
 dataCollector = st.button('Click to start data collection')
-
-
+print(dataCollector)
 if dataCollector:
-    #os.system('cd /Users/2602651K/PycharmProjects/PsychoPy3/demos/ && python et_demo.py')
-    collector.collect_data()
+    os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
     dataCollector = False
-
-
+    st.write('Data collection is done')
