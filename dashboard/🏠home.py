@@ -5,8 +5,6 @@ from psychopy import visual, monitors, gui, core
 import numpy as np
 import matplotlib.pyplot as plt
 from titta import Titta, helpers_tobii as helpers
-import sys
-print(sys.path)
 import streamlit as st
 
 
