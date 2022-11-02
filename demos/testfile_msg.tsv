@@ -1,0 +1,23 @@
+	system_time_stamp	msg
+0	934973909520	Calibration_start
+1	934973917887	calibration point 0 at position 19.169474339912615 10.782829316200846
+2	934980395591	calibration point 1 at position -19.169474339912615 10.782829316200846
+3	934982545316	calibration point 2 at position 0.0 -0.0
+4	934984695486	calibration point 3 at position 19.169474339912615 -10.782829316200846
+5	934986878771	calibration point 4 at position -19.169474339912615 -10.782829316200846
+6	934989954253	Calibration_stop
+7	934990054443	Validation_start
+8	934990544865	validation point 0 at position 0.0 -8.087121987150637
+9	934992045289	validation point 1 at position -14.377105754934458 -0.0
+10	934993545436	validation point 2 at position 14.377105754934462 -0.0
+11	934995045550	validation point 3 at position 0.0 8.087121987150633
+12	934996045377	Validation_end
+13	934996077098	validation data quality Dev_L: 0.56, Dev_R: 0.59 RMS_L: 0.10, RMS_R: 0.14, SD_L: 0.07, SD_R: 0.11, LOSS_L: 0.00, LOSS_R: 0.00
+14	935011022978	fix on
+15	935011995630	fix off
+16	935012012203	onset_im1.jpeg
+17	935014995579	offset_im1.jpeg
+18	935015012213	onset_im2.jpeg
+19	935017995564	offset_im2.jpeg
+20	935018012135	onset_im3.jpeg
+21	935020995560	offset_im3.jpeg

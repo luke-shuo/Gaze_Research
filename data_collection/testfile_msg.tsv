@@ -1,0 +1,21 @@
+	system_time_stamp	msg
+0	1019670913029	Calibration_start
+1	1019670920699	calibration point 0 at position 19.169474339912615 -10.782829316200846
+2	1019674494774	calibration point 1 at position 0.0 -0.0
+3	1019676777910	calibration point 2 at position -19.169474339912615 10.782829316200846
+4	1019679694727	calibration point 3 at position 19.169474339912615 10.782829316200846
+5	1019682027892	calibration point 4 at position -19.169474339912615 -10.782829316200846
+6	1019685905944	Calibration_stop
+7	1019686006149	Validation_start
+8	1019686478031	validation point 0 at position 0.0 8.087121987150633
+9	1019687961450	validation point 1 at position 0.0 -8.087121987150637
+10	1019689445052	validation point 2 at position -14.377105754934458 -0.0
+11	1019690928182	validation point 3 at position 14.377105754934462 -0.0
+12	1019691928209	Validation_end
+13	1019691966582	validation data quality Dev_L: 0.77, Dev_R: 0.37 RMS_L: 0.34, RMS_R: 0.31, SD_L: 0.20, SD_R: 0.19, LOSS_L: 0.00, LOSS_R: 0.00
+14	1019694745280	fix on
+15	1019695728333	fix off
+16	1019695758115	onset_unnamed MovieStim3
+17	1019705727995	offset_unnamed MovieStim3
+18	1019705745027	onset_unnamed MovieStim3
+19	1019715730501	offset_unnamed MovieStim3
