@@ -67,6 +67,3 @@ if dataClean:
     data_clean(globalVal.dataCollector_path + 'test1.csv',
                globalVal.dataCollector_path + 'testfile_msg.tsv')
     st.write('Data clean is done')
-
-st.write(os.getcwd())
-st.write(os.name)
