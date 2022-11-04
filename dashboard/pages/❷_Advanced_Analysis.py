@@ -19,17 +19,15 @@ from util import remove_overlap
 from util import checkOverlap
 
 imageFileName = []
-for filename in os.listdir('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images'):
+for filename in os.listdir(globalVal.images_path):
     imageFileName.append(filename[-8:-5])
-imageFileName.reverse()
 image_name = st.sidebar.selectbox('Select the image',imageFileName)
-image_csv = pd.read_csv('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/image.csv')
+image_csv = pd.read_csv(globalVal.dataset_path+'image.csv')
 image_list = np.array(image_csv['0']).tolist()
 dataset_index = image_list.index(image_name)
 
-#gaze_data = '/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataset/dataset%d.csv' % dataset_index
-gaze_data = globalVal.gaze_data
-image_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images/'+ image_name+ '.jpeg'
+dataset = globalVal.dataset_path + 'dataset%d.csv' % dataset_index
+image = globalVal.images_path + image_name + '.jpeg'
 
 st.markdown("""
 <style>
@@ -49,12 +47,12 @@ st.markdown("""
 period = st.sidebar.selectbox('Choose the period of each piece',(10,5))
 fig_index = st.sidebar.slider('Timeline of fixations', 1, int(60/period))
 
-img = cv2.imread(image_data)
+img = cv2.imread(image)
 #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 @st.cache
 def load_data():
-    data = pd.read_csv(gaze_data)
+    data = pd.read_csv(dataset)
     data.fillna(0, inplace=True)    # Using '0' to replace 'N\A'
     return data
 data = load_data()
@@ -68,7 +66,7 @@ bs = list()
 for i in range(int(60/period)):
     Sfix, Efix = fixation_detection(x[i*60*period:(i+1)*60*period], y[i*60*period:(i+1)*60*period], time[i*60*period:(i+1)*60*period], missing=0.0, maxdist=15, mindur=50)
     fixations = Efix
-    fixation = draw_fixations(fixations, dispsize=[1920, 1080], imagefile=image_data,
+    fixation = draw_fixations(fixations, dispsize=[1920, 1080], imagefile=image,
                               alpha=0.4)
     fixation = image_convert(fixation)
     bs.append(fixation[np.newaxis, :])
@@ -84,7 +82,7 @@ step_index = find_steppulse_index(step_list)
 # find aoi based on fixation jump
 aoi_loc = jump_aoiLocation(step_index,fixations)
 fix_number = fix_count(fixations=fixations,AOI=aoi_loc)
-bounding_map = draw_boundingbox(aoi=aoi_loc, imagefile=image_data,fix_number=fix_number)
+bounding_map = draw_boundingbox(aoi=aoi_loc, imagefile=image, fix_number=fix_number)
 
 while True:
     # check overlap
@@ -95,15 +93,15 @@ while True:
     if sum(state) == 0:
         break
 
-map_overlap = draw_boundingbox(aoi=aoi_loc, imagefile=image_data,fix_number=fix_number)
-####################################
+map_overlap = draw_boundingbox(aoi=aoi_loc, imagefile=image, fix_number=fix_number)
+
 
 fig_index_impulse = st.sidebar.slider('Timeline of fixations based on impulse', 1, len(step_index)-1)
 
 dominate_aoi_impulse = []
 bs_impulse = list()
 for i in range(len(step_index)-1):
-    fixation = draw_fixations(fixations[step_index[i]:step_index[i+1]], dispsize=[1920, 1080], imagefile=image_data,
+    fixation = draw_fixations(fixations[step_index[i]:step_index[i+1]], dispsize=[1920, 1080], imagefile=image,
                               alpha=0.4)
     fixation = image_convert(fixation)
     bs_impulse.append(fixation[np.newaxis, :])

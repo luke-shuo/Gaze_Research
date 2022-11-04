@@ -19,22 +19,21 @@ from util import turnback_count
 
 # get data address from globalVal.py
 imageFileName = []
-for filename in os.listdir('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images'):
+for filename in os.listdir(globalVal.images_path):
     imageFileName.append(filename[-8:-5])
-imageFileName.reverse()
-image_name = st.sidebar.selectbox('Select the image',imageFileName)
-image_csv = pd.read_csv('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/image.csv')
+image_name = st.sidebar.selectbox('Select the image', imageFileName)
+image_csv = pd.read_csv(globalVal.dataset_path+'image.csv')
 image_list = np.array(image_csv['0']).tolist()
 dataset_index = image_list.index(image_name)
 
-gaze_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/dataset%d.csv' % dataset_index
-image_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images/'+ image_name+ '.jpeg'
+dataset = globalVal.dataset_path + 'dataset%d.csv' % dataset_index
+image = globalVal.images_path + image_name + '.jpeg'
 
-
-fixation_addr = globalVal.fixation_addr
-bounding_addr = globalVal.bounding_map_addr
-video_addr = globalVal.video_data
+fixation_addr = globalVal.fixations_path
+bounding_image = globalVal.bounding_image_path
+video_addr = globalVal.video_output_path
 aoi_loc = []
+stimulus_duration = 60
 
 st.markdown("""
 <style>
@@ -61,7 +60,7 @@ else:
 # Load gaze data from dataset.
 @st.cache
 def load_data():
-    data = pd.read_csv(gaze_data)
+    data = pd.read_csv(dataset)
     data.fillna(0, inplace=True)    # Using '0' to replace 'N\A'
     return data
 data = load_data()
@@ -82,23 +81,23 @@ Sfix, Efix = fixation_detection(x, y, time, missing=0.0, maxdist=15, mindur=50)
 fixations = Efix
 fixations_inte = fixations_integration(time=time, fixations=fixations, dur=integration_index)
 
-fixation = draw_fixations(fixations, dispsize = [1920, 1080], imagefile=image_data,
-                        alpha=0.4, size=circle_size,savefilename=bounding_addr)
-fixation_inte = draw_fixations(fixations_inte, dispsize = [1920, 1080], imagefile=image_data,
-                        alpha=0.4)
+fixation = draw_fixations(fixations, dispsize = [1920, 1080], imagefile=image,
+                          alpha=0.4, size=circle_size, savefilename=bounding_image)
+fixation_inte = draw_fixations(fixations_inte, dispsize = [1920, 1080], imagefile=image,
+                               alpha=0.4)
 
 fixation = image_convert(fixation)
 fixation_inte = image_convert(fixation_inte)
 
 # generate default transition video
-if not os.path.exists(video_addr+ image_name+'_default' + '.mp4'):
+if not os.path.exists(video_addr + image_name +'_default' + '.mp4'):
     fourcc = cv2.VideoWriter_fourcc(*'avc1')  # H264
-    videowrite = cv2.VideoWriter(video_addr + image_name+'_default' + '.mp4', fourcc, len(fixations)/60,
+    videowrite = cv2.VideoWriter(video_addr + image_name+'_default' + '.mp4', fourcc, len(fixations)/stimulus_duration,
                                      (1920,1080))
     for j in range(len(fixations)):
         fixation_slice = draw_fixations([fixations[j]], dispsize=[1920, 1080],
                                         savefilename=fixation_addr+'/1.jpg',
-                                        imagefile=image_data, alpha=0.4)
+                                        imagefile=image, alpha=0.4)
         draw_arrows(fixations=fixations, index=j, imagefile=fixation_addr+'/1.jpg')
         img = cv2.imread(fixation_addr + '/1.jpg')
         videowrite.write(img)
@@ -113,7 +112,7 @@ if submit_button:
     for j in range(len(fixations_inte)):
         fixation_slice = draw_fixations([fixations_inte[j]], dispsize=[1920, 1080],
                                         savefilename=fixation_addr + '/1.jpg',
-                                        imagefile=image_data, alpha=0.4)
+                                        imagefile=image, alpha=0.4)
         draw_arrows(fixations=fixations_inte, index=j, imagefile=fixation_addr + '/1.jpg')
         img = cv2.imread(fixation_addr + '/1.jpg')
         videowrite.write(img)
@@ -125,8 +124,8 @@ step_list = step_count(fixations)
 fix_dur, turnback_count, turnback_index = turnback_count(fixations)
 
 # heatmap results
-heatmap = draw_heatmap(fixations, dispsize = [1920, 1080], imagefile=image_data,
-                        alpha=0.4)
+heatmap = draw_heatmap(fixations, dispsize = [1920, 1080], imagefile=image,
+                       alpha=0.4)
 heatmap  = image_convert(heatmap)
 
 

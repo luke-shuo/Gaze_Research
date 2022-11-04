@@ -1,4 +1,0 @@
-image_name,     image_address,                                                  aoi_location
-img1,           /Users/luke-shuo/PycharmProjects/dashboard/s1.png,              "[(424, 342, 0), (829, 275, 1), (290, 398, 0), (1274, 337, 1)]"
-img2,           /Users/luke-shuo/PycharmProjects/dashboard/s2.png,              "[(424, 342, 0), (829, 275, 1)]"
-img3,           /Users/luke-shuo/PycharmProjects/dashboard/s3.png,              "[(424, 342, 0), (829, 275, 1)]"
