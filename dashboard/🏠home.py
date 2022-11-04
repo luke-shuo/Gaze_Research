@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 import streamlit as st
+import globalVal
 from util import data_clean
 
 st.set_page_config(layout="wide", page_title="Gaze Tracking DashBoard")
@@ -58,13 +59,13 @@ div.stButton > button:active {
 dataCollector = st.button('Click to start data collection')
 dataClean  = st.sidebar.checkbox('Click to start data clean')
 if dataCollector:
-    os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
+    #os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
     dataCollector = False
     st.write('Data collection is done')
 
 if dataClean:
-    data_clean('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/test1.csv',
-               '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/testfile_msg.tsv')
+    data_clean(globalVal.dataCollector_path + 'test1.csv',
+               globalVal.dataCollector_path + 'testfile_msg.tsv')
     st.write('Data clean is done')
 
 st.write(os.getcwd())
