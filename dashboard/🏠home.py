@@ -56,9 +56,13 @@ div.stButton > button:active {
 </style>""", unsafe_allow_html=True)  # used to customized button
 
 dataCollector = st.button('Click to start data collection')
+dataClean  = st.sidebar.button('Click to start data clean')
 if dataCollector:
     os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
     dataCollector = False
     st.write('Data collection is done')
-    data_clean('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/tedast1.csv',
+
+if dataClean:
+    data_clean('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/test1.csv',
                '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/testfile_msg.tsv')
+    st.write('Data clean is done')

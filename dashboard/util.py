@@ -625,12 +625,12 @@ def data_clean(data_path, set_path):
                            'x_cod_right_gaze': x_2,
                            'y_cod_right_gaze': y_2
                            })
-        df.to_csv('dataset/dataset%d.csv' %(i/2))
+        df.to_csv('C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataset\\dataset%d.csv' %(i/2))
     image_csv = []
     for i in range(0, len(image_info), 3):
         image_csv.append(image_info[i][-8:-5])
     df = pd.DataFrame(image_csv)
-    df.to_csv('dataset/image.csv')
+    df.to_csv('C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataset\\image.csv')
 
 
 

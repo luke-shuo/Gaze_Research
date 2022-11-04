@@ -19,17 +19,17 @@ from util import remove_overlap
 from util import checkOverlap
 
 imageFileName = []
-for filename in os.listdir('/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataCollector/images'):
+for filename in os.listdir('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images'):
     imageFileName.append(filename[-8:-5])
 imageFileName.reverse()
 image_name = st.sidebar.selectbox('Select the image',imageFileName)
-image_csv = pd.read_csv('/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataset/image.csv')
+image_csv = pd.read_csv('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataset/image.csv')
 image_list = np.array(image_csv['0']).tolist()
 dataset_index = image_list.index(image_name)
 
 #gaze_data = '/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataset/dataset%d.csv' % dataset_index
 gaze_data = globalVal.gaze_data
-image_data = '/Users/luke-shuo/Documents/GitHub/Dashboard_Gaze/dataCollector/images/'+ image_name+ '.jpeg'
+image_data = '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images/'+ image_name+ '.jpeg'
 
 st.markdown("""
 <style>
@@ -50,7 +50,7 @@ period = st.sidebar.selectbox('Choose the period of each piece',(10,5))
 fig_index = st.sidebar.slider('Timeline of fixations', 1, int(60/period))
 
 img = cv2.imread(image_data)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+#img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 @st.cache
 def load_data():

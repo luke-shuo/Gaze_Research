@@ -30,9 +30,9 @@ settings.N_CAL_TARGETS = 5
 settings.FILENAME = 'testfile.tsv'
 im_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataCollector\\images\\'
 vi_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataCollector\\videos\\'
-im_names = ['im1.jpeg', 'im2.jpeg', 'im3.jpeg']
+im_names = ['im1.jpeg','im2.jpeg','im3.jpeg']
 vi_names = ['video1.mp4', 'video2.mp4']
-stimulus_duration = 5
+stimulus_duration = 60
 
 # Task selector
 myDlg = gui.Dlg(title="Gaze Research")
@@ -73,7 +73,7 @@ else:
 
 # %% Record some data
 tracker.start_recording(gaze_data=True, store_data=True)
-tracker.gaze_data_container = []
+#tracker.gaze_data_container = []
 
 # Present fixation dot and wait for one second
 for i in range(monitor_refresh_rate):
@@ -114,7 +114,7 @@ win.flip()
 tracker.stop_recording(gaze_data=True)
 
 # Close window and save data
-def read_et_data(mon):
+def read_et_data():
     ''' Read eye tracking data from the buffer
 
     Returns:
