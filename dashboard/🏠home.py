@@ -66,3 +66,5 @@ if dataClean:
     data_clean('/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/test1.csv',
                '/Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/testfile_msg.tsv')
     st.write('Data clean is done')
+
+st.write(os.getcwd())
