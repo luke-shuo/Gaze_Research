@@ -66,6 +66,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\dashboard\image_data\image.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\demos\test1.csv">
           <value>
             <Attribute>
