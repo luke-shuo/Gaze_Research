@@ -1,13 +1,8 @@
-import numpy as np
-import cv2
 import math
-from math import sqrt, acos, pow
+from titta import Titta, helpers_tobii as helpers
+import cv2
+import numpy as np
 import pandas as pd
-import json
-import csv
-import matplotlib
-from matplotlib import pyplot, image
-import os
 import globalVal
 
 video_addr = globalVal.video_data
@@ -124,7 +119,7 @@ def fixation_detection(x, y, time, missing=0.0, maxdist=25, mindur=50):
             # end the current fixation
             fixstart = False
             # only store the fixation if the duration is ok
-            if time[i - 1] - Sfix[-1][0] >= mindur:
+            if time[i - 1] - Sfix[-1][0] >= (mindur*1000):  #used to be mindur
                 Efix.append([Sfix[-1][0], time[i - 1], time[i - 1] - Sfix[-1][0], x[si], y[si]])
             # delete the last fixation start if it was too short
             else:
@@ -489,9 +484,9 @@ def find_dominate_aoi(fixations, aoi_num=6):
 
     if aoi_num != 6:
         x_step = 1920 / 4
-        y_step = 1080 / 3
+        y_step = 1080 / 4
     else:
-        x_step = 1920 / 3
+        x_step = 1920 / 4
         y_step = 1080 / 2
 
     aoi = []
@@ -504,30 +499,18 @@ def find_dominate_aoi(fixations, aoi_num=6):
 
 
 def find_steppulse_index(step_list, thresh=3):
-    step = list()
-    step.append(step_list[0])
-    for i in range(1, len(step_list) - 1):
-        high = step_list[i] - step_list[i - 1] - step_list[i + 1]
-        if high >= 0:
-            step.append(high)
-        else:
-            step.append(0)
-    step.append(step_list[len(step_list) - 1])
-
-    threshold = max(step) / thresh
+    threshold = max(step_list) / thresh
     step_index = list()
-    step_index.append(0)
-    for j in range(len(step)):
-        if step[j] >= threshold:
+    for j in range(len(step_list)):
+        if step_list[j] >= threshold:
             step_index.append(j)
-    step_index.append(len(step_list))
     return step_index
 
 def jump_aoiLocation(step_index, fixations):
     aoi_loc = list()
     for i in range(len(step_index) - 1):
-        top_left = (int(fixations[step_index[i] + 2][3]), int(fixations[step_index[i] + 2][4]), 0)
-        bottom_right = (int(fixations[step_index[i + 1]][3]), int(fixations[step_index[i + 1]][4]), 1)
+        top_left = (int(fixations[step_index[i] + 1][3]), int(fixations[step_index[i] + 1][4]), 0)
+        bottom_right = (int(fixations[step_index[i + 1] ][3]), int(fixations[step_index[i + 1] ][4]), 1)
         aoi_loc.append(top_left)
         aoi_loc.append(bottom_right)
     return aoi_loc
@@ -592,3 +575,62 @@ def remove_overlap(aoi_location, state):
             aoi.append((minx,miny,0))
             aoi.append((maxx,maxy,1))
     return aoi
+
+def data_clean(data_path, set_path):
+    data_msg = pd.read_csv(set_path, sep='\t', header=0)
+    sys_time = np.array(data_msg['system_time_stamp'])
+    msg = np.array(data_msg['msg'])
+    image_info = []
+    for i in range(len(msg)):
+        if msg[i] == 'fix off':
+            for j in range(i + 1, len(msg), 2):
+                image_info.append(msg[j])
+                image_info.append(sys_time[j])
+                image_info.append(sys_time[j + 1])
+    gazedata = pd.read_csv(data_path)
+    sys_time = np.array(gazedata['system_time_stamp'])
+    index = []
+    for i in range(0, len(image_info), 3):
+        st = image_info[i + 1]
+        et = image_info[i + 2]
+        j = 0
+        while True:
+            if sys_time[j] >= st:
+                index.append(j)
+                break
+            j += 1
+        i = 0
+        while True:
+            if sys_time[i] >= et:
+                index.append(i - 1)
+                break
+            if i == (len(sys_time) - 1):
+                index.append(i)
+                break
+            i += 1
+
+    x_l = np.array(gazedata['left_gaze_point_on_display_area_x'])
+    x_r = np.array(gazedata['right_gaze_point_on_display_area_x'])
+    y_l = np.array(gazedata['left_gaze_point_on_display_area_y'])
+    y_r = np.array(gazedata['right_gaze_point_on_display_area_y'])
+    for i in range(0, len(index), 2):
+        time = sys_time[index[i]:index[i + 1] + 1]
+        x_1 = x_l[index[i]:index[i + 1] + 1] * 1920
+        x_2 = x_r[index[i]:index[i + 1] + 1] * 1920
+        y_1 = y_l[index[i]:index[i + 1] + 1] * 1080
+        y_2 = y_r[index[i]:index[i + 1] + 1] * 1080
+        df = pd.DataFrame({'time_stamp': time,
+                           'x_cod_left_gaze': x_1,
+                           'y_cod_left_gaze': y_1,
+                           'x_cod_right_gaze': x_2,
+                           'y_cod_right_gaze': y_2
+                           })
+        df.to_csv('C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataset\\dataset%d.csv' %(i/2))
+    image_csv = []
+    for i in range(0, len(image_info), 3):
+        image_csv.append(image_info[i][-8:-5])
+    df = pd.DataFrame(image_csv)
+    df.to_csv('C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataset\\image.csv')
+
+
+
