@@ -631,5 +631,7 @@ def data_clean(data_path, set_path):
     df = pd.DataFrame(image_csv)
     df.to_csv(globalVal.dataset_path+'image.csv')
 
+#def gaussianFilter(AOI_list,image):
+
 
 
