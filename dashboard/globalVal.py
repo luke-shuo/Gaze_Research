@@ -12,7 +12,6 @@ if os.name == 'nt':
     video_output_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\video_output\\'
     bounding_image_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\bounding_image\\'
 else:
-<<<<<<< HEAD
     dataCollector_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/dataCollector/'
     images_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/dataCollector/images/'
     videos_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/dataCollector/videos/'
@@ -20,4 +19,3 @@ else:
     fixations_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/fixations/'
     video_output_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/video_output/'
     bounding_image_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/bounding_image/'
-
