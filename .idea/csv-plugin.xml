@@ -3,27 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\dashboard\dataCollector\dataset0.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\dashboard\dataCollector\dataset2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\dashboard\dataCollector\dataset4.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\dashboard\dataCollector\test1.csv">
           <value>
             <Attribute>
@@ -60,13 +39,6 @@
           </value>
         </entry>
         <entry key="\dashboard\dataset\image.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\dashboard\image_data\image.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
