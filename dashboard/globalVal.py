@@ -19,3 +19,4 @@ else:
     fixations_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/fixations/'
     video_output_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/video_output/'
     bounding_image_path = '/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/bounding_image/'
+st_duration = 20

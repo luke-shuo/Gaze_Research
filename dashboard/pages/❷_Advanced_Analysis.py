@@ -90,7 +90,7 @@ for i in range(len(step_index)-1):
                               alpha=0.4)
     fixation = image_convert(fixation)
     bs_impulse.append(fixation[np.newaxis, :])
-    dominate_aoi_impulse.append(find_dominate_aoi(fixations=fixations[step_index[i]:step_index[i+1]], aoi_num=(60 / period)))
+    dominate_aoi_impulse.append(find_dominate_aoi(fixations=fixations[step_index[i]:step_index[i+1]], aoi_num=(globalVal.st_duration / period)))
 
 graph = graphviz.Digraph()
 for i in range(len(dominate_aoi)-1):
