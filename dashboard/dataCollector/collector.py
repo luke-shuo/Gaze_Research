@@ -32,7 +32,7 @@ im_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dat
 vi_path = 'C:\\Users\\2602651K\\Documents\\GitHub\\Gaze_Research\\dashboard\\dataCollector\\videos\\'
 im_names = ['im1.jpeg','im2.jpeg','im3.jpeg']
 vi_names = ['video1.mp4', 'video2.mp4']
-stimulus_duration = 30
+stimulus_duration = 60
 
 # Task selector
 myDlg = gui.Dlg(title="Gaze Research")
