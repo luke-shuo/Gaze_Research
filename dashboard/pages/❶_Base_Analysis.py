@@ -16,6 +16,7 @@ from util import video_generator
 from util import fixations_integration
 from util import step_count
 from util import turnback_count
+from plots import draw_guage
 
 # get data address from globalVal.py
 imageFileName = []
@@ -112,6 +113,13 @@ fix_dur, turnback_count, turnback_index = turnback_count(fixations)
 heatmap = draw_heatmap(fixations, dispsize = [1920, 1080], imagefile=image,
                        alpha=0.4)
 heatmap  = image_convert(heatmap)
+
+guage = draw_guage(400)
+
+col3, col4 = st.columns(2)
+with col3:
+    st.header('Concentrate Level')
+    st.image(guage)
 
 
 col1, col2 = st.columns(2)

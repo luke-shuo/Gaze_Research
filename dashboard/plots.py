@@ -7,6 +7,7 @@ import numpy
 import numpy as np
 from matplotlib import pyplot, image
 from matplotlib.backends.backend_agg import FigureCanvasAgg
+import plotly.graph_objects as go
 
 from util import parse_fixations
 
@@ -463,6 +464,30 @@ def draw_aoi_map(img, period):
 		cv2.putText(img, 'AOI %d' % (j + 1), text_loc[j],
 					cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 4)
 
+def draw_guage(ConcenLevel = 300):
+	fig = go.Figure(go.Indicator(
+		mode="gauge+number",
+		value=ConcenLevel,
+		domain={'x': [0, 1], 'y': [0, 1]},
+		# title = {'text': "Level of Concentration", 'font': {'size': 24}},
+		gauge={
+			'axis': {'range': [None, 500], 'tickwidth': 1, 'tickcolor': "blue"},
+			'bar': {'color': 'rgb(255,215,0)'},
+			'bgcolor': "white",
+			'borderwidth': 2,
+			'bordercolor': "gray",
+			'steps': [
+				{'range': [0, 100], 'color': 'rgb(240,248,255)'},
+				{'range': [100, 200], 'color': 'rgb(176,196,222)'},
+				{'range': [200, 300], 'color': 'rgb(100,149,237)'},
+				{'range': [300, 400], 'color': 'rgb(65,105,225)'},
+				{'range': [400, 500], 'color': 'rgb(0,0,205)'}],
+			'threshold': {
+				'line': {'color': 'rgb(255,215,0)', 'width': 4},
+				'thickness': 0.75,
+				'value': 500}}))
+	fig.update_layout(paper_bgcolor="white", font={'color': 'rgb(85,146,239)', 'family': "Arial"})
+	return fig.to_image()
 # ----------------- Helper functions ---------------
 
 def gaussian(x, sx, y=None, sy=None):
@@ -495,7 +520,6 @@ def gaussian(x, sx, y=None, sy=None):
 				-1.0 * (((float(i) - xo) ** 2 / (2 * sx * sx)) + ((float(j) - yo) ** 2 / (2 * sy * sy))))
 
 	return M
-
 
 def image_convert(image):
 	"""Returns an array of numpy arrays

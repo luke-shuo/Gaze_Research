@@ -514,7 +514,6 @@ def jump_aoiLocation(step_index, fixations):
         aoi_loc.append(bottom_right)
     return aoi_loc
 
-
 def checkOverlap(aoi_location):
     # Reshape the structure of aoi_location into (x,y,w,h)
     aoi = list()
@@ -630,6 +629,12 @@ def data_clean(data_path, set_path):
         image_csv.append(image_info[i][-8:-5])
     df = pd.DataFrame(image_csv)
     df.to_csv(globalVal.dataset_path+'image.csv')
+
+def concenLevel(fixations):
+    fix = parse_fixations(fixations)
+    x_loc = fix['x']
+    y_loc = fix['y']
+    dur = fix['dur']
 
 #def gaussianFilter(AOI_list,image):
 
