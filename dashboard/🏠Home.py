@@ -46,7 +46,7 @@ div.stButton > button:active {
 dataCollector = st.button('Click to start data collection')
 dataClean  = st.sidebar.checkbox('Click to start data clean')
 if dataCollector:
-    os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
+    #os.system('cd /Users/2602651K/Documents/GitHub/Gaze_Research/dashboard/dataCollector/ && python collector.py')
     dataCollector = False
     st.success('Data collection is done')
 

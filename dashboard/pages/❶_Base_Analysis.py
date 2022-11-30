@@ -114,21 +114,24 @@ heatmap = draw_heatmap(fixations, dispsize = [1920, 1080], imagefile=image,
                        alpha=0.4)
 heatmap  = image_convert(heatmap)
 
-guage = draw_guage(400)
-
-col3, col4 = st.columns(2)
-with col3:
-    st.header('Concentrate Level')
-    st.image(guage)
-
+guage = draw_guage(368)
 
 col1, col2 = st.columns(2)
 with col1:
+    st.header('Concentrate Level')
+    st.image(guage)
+with col2:
     st.header("Fixations")
     st.image(fixation)
-with col2:
-    st.header("Fixations transition map")
-    st.image(fixation_inte)
+
+st.header("Top-3 Concentrated Areas")
+col5, col6, col7 = st.columns(3)
+with col5:
+    st.image('/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/im4.jpeg')
+with col6:
+    st.image('/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/im5.jpeg')
+with col7:
+    st.image('/Users/lukeshuo/Documents/GitHub/Gaze_Research/dashboard/im6.jpeg')
 
 if submit_button:
     st.header("Transition Video")
@@ -140,13 +143,3 @@ else:
 st.header("Heatmap")
 st.image(heatmap)
 
-#tab1, tab2, tab3 = st.tabs(["Step Length", "Duration", "Angles"])
-#with tab1:
-st.header("Step length line chart")
-st.line_chart(step_list)
-#with tab2:
-st.header("Duration of fixations")
-st.line_chart(fix_dur)
-#with tab3:
-st.header("Angles between two arrows")
-st.line_chart(turnback_index)

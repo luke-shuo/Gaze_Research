@@ -14,6 +14,7 @@ from util import find_dominate_aoi
 from util import find_steppulse_index
 from util import step_count
 from util import fix_count
+from util import turnback_count
 from util import jump_aoiLocation
 from util import remove_overlap
 from util import checkOverlap
@@ -129,6 +130,16 @@ with col5:
 with col6:
     st.header("AOI map without overlap")
     st.image(map_overlap)
+
+#tab1, tab2, tab3 = st.tabs(["Step Length", "Duration", "Angles"])
+step_list = step_count(fixations)
+fix_dur, turnback_count, turnback_index = turnback_count(fixations)
+#with tab1:
+st.header("Step length line chart")
+st.line_chart(step_list)
+#with tab2:
+st.header("Duration of fixations")
+st.line_chart(fix_dur)
 
 st.header('Dominate AOI in selected time')
 st.table(df)
