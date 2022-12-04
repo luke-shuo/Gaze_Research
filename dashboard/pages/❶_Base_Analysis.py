@@ -118,7 +118,7 @@ guage = draw_guage(368)
 
 col1, col2 = st.columns(2)
 with col1:
-    st.header('Concentrate Level')
+    st.header('Concentration Level')
     st.image(guage)
 with col2:
     st.header("Fixations")
